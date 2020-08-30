@@ -13,10 +13,11 @@ public class Neure_second_0 {
     private static String filePath_suffix = ".properties";
     public Neure_second_0() {
         try{
+
             String className = this.getClass().getSimpleName();
             File file = new File(filePath_prefix+className+filePath_suffix);
-            if (!file.exists())
-                file.createNewFile();
+            if (!file.exists()) file.createNewFile();
+
             InputStream fis = new FileInputStream(file);
             prop.load(fis);
             fis.close();
