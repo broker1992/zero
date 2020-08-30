@@ -13,6 +13,7 @@ public class Neure_second_2 {
     private static String filePath_suffix = ".properties";
     public Neure_second_2() {
         try{
+
             String className = this.getClass().getName();
             File file = new File(filePath_prefix+className+filePath_suffix);
             if (!file.exists())
