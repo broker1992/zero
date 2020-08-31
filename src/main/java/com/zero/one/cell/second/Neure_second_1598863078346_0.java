@@ -5,7 +5,7 @@ import com.zero.one.utils.CellIDCreater;
 import java.io.*;
 import java.util.Properties;
 
-public class Neure_second_0 {
+public class Neure_second_1598863078346_0 {
 
     private Properties prop = new Properties();
     private static String filePath_prefix = "src/main/resources/config/cell/second/";
@@ -13,7 +13,7 @@ public class Neure_second_0 {
     private static String classPath_prefix = "src/main/java/com/zero/one/cell/second/";
     private static String classPath_suffix = ".java";
     private static String baseName = "Neure_second";
-    public Neure_second_0() {
+    public Neure_second_1598863078346_0() {
         try{
 
             String className = this.getClass().getSimpleName();
@@ -27,12 +27,6 @@ public class Neure_second_0 {
             e.printStackTrace();
         }
     }
-    // 模拟突出的生成
-    public void createDendrite(){
-
-    }
-
-
     //自身复制的功能－计时＊＊分钟后开始复制自己
     public void copySelf(){
         String className = this.getClass().getSimpleName();
