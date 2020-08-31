@@ -4,7 +4,12 @@ import com.zero.one.utils.CellIDCreater;
 
 import java.io.*;
 import java.util.Properties;
-
+/*
+*  神经元自我复制-已实现
+*  自动生成突触-之间的神经递质-使用对象表示
+*
+*
+* */
 public class Neure_second_0 {
 
     private Properties prop = new Properties();

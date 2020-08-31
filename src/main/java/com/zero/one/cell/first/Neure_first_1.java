@@ -44,9 +44,6 @@ public class Neure_first_1 {
     private void axon(){
         Neure_second_0 second_0 = new Neure_second_0();
         second_0.copySelf();
-
-
-
     }
 
 
