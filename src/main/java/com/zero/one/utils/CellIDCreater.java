@@ -1,6 +1,7 @@
 package com.zero.one.utils;
 
 import java.io.*;
+import java.util.Enumeration;
 import java.util.Properties;
 
 public class CellIDCreater {
@@ -46,5 +47,25 @@ public class CellIDCreater {
 
 
 
+    }
+    //静态方法-获取一个类名后缀
+    public static String getSecondNeruSuffix(){
+        File file = new File(filePath);
+        Properties prop = new Properties();
+        try{
+            if (!file.exists())
+                file.createNewFile();
+            InputStream fis = new FileInputStream(file);
+
+            prop.load(fis);
+            fis.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        Enumeration<Object> keys = prop.keys();
+        while(keys.hasMoreElements()){
+            String key = (String)keys.nextElement();
+            
+        }
     }
 }

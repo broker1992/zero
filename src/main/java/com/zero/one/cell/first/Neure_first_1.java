@@ -1,6 +1,12 @@
 package com.zero.one.cell.first;
 
+import com.zero.one.cell.NeuroTrans.Mitter;
+import com.zero.one.cell.second.Neure_second;
 import com.zero.one.cell.second.Neure_second_0;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.Properties;
@@ -13,16 +19,17 @@ import java.util.Properties;
 *
 *
 * */
-public class Neure_first_1 {
+@Service
+public class Neure_first_1 implements ApplicationContextAware {
 
-
+    private static ApplicationContext applicationContext;
     private  Properties prop = new Properties();
     private static String filePath_prefix = "src/main/resources/config/cell/first/";
     private static String filePath_suffix = ".properties";
 
+
     //胞体
     public Neure_first_1() {
-
         try{
             String className = this.getClass().getSimpleName();
             File file = new File(filePath_prefix+className+filePath_suffix);
@@ -34,7 +41,6 @@ public class Neure_first_1 {
         }catch (IOException e){
             e.printStackTrace();
         }
-
     }
     /*
     * 承担轴突的职责 -轴突可以连接上 其他神经元的树突
@@ -48,20 +54,25 @@ public class Neure_first_1 {
 
 
     // 承担树突 的职责
-    // 记录传入的字符串 的次数
+    // 根据配置文件中的记录，需要连接的树突
     public  void dendrite_1(String key) {
         //先获取
-        int count =1;
+
         String v = prop.getProperty(key);
         if(!"".equals(v)&& v!=null){
             System.out.println("知道这个");
-            count = Integer.valueOf(prop.getProperty(key))+1;
+            //拼接 二层神经元的名称
+            String className = "Neure_second_"+v;
+            Neure_second neure_second = (Neure_second)getBean(className);
+            Mitter mitter = new Mitter(key);
+            neure_second.dendrite(mitter);
 
         }else{
+            //如果是第一次连接 需要从
             System.out.println("?");
         }
 
-        String value = count+"";
+        String value = "";
         //保存
         saveToproperties(key,value);
         //传递到轴突
@@ -87,4 +98,17 @@ public class Neure_first_1 {
 
     }
 
+    //根据类名获取bean
+    public static <T> T getBean(String beanName) {
+        if(applicationContext.containsBean(beanName)){
+            return (T) applicationContext.getBean(beanName);
+        }else{
+            return null;
+        }
+    }
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+
+        Neure_first_1.applicationContext = applicationContext;
+
+    }
 }

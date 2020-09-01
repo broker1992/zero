@@ -1,6 +1,8 @@
 package com.zero.one.cell.second;
 
+import com.zero.one.cell.NeuroTrans.Mitter;
 import com.zero.one.utils.CellIDCreater;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.Properties;
@@ -10,7 +12,8 @@ import java.util.Properties;
 *
 *
 * */
-public class Neure_second_0 {
+@Service
+public class Neure_second_0 implements Neure_second{
 
     private Properties prop = new Properties();
     private static String filePath_prefix = "src/main/resources/config/cell/second/";
@@ -58,7 +61,7 @@ public class Neure_second_0 {
             String line = null;
             while((line = bufferedReader.readLine())!=null){
 
-                System.out.println(line);
+//                System.out.println(line);
                 bufferedWriter.write(line.replace(className,classCopyName));
                 bufferedWriter.newLine();
             }
@@ -71,11 +74,16 @@ public class Neure_second_0 {
             fis.close();
             fout.close();
             fout.flush();
-
+            System.out.println("className-类-复制完成！");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
+    }
+
+    @Override
+    public void dendrite(Mitter mitter) {
+        System.out.println("传递到第二层"+mitter.toString());
     }
 }
