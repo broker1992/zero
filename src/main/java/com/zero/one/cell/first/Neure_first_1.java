@@ -3,6 +3,7 @@ package com.zero.one.cell.first;
 import com.zero.one.cell.NeuroTrans.Mitter;
 import com.zero.one.cell.second.Neure_second;
 import com.zero.one.cell.second.Neure_second_0;
+import com.zero.one.utils.CellIDCreater;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -59,22 +60,26 @@ public class Neure_first_1 implements ApplicationContextAware {
         //先获取
 
         String v = prop.getProperty(key);
+        Neure_second neure_second = null;
         if(!"".equals(v)&& v!=null){
             System.out.println("知道这个");
             //拼接 二层神经元的名称
             String className = "Neure_second_"+v;
-            Neure_second neure_second = (Neure_second)getBean(className);
-            Mitter mitter = new Mitter(key);
-            neure_second.dendrite(mitter);
+            neure_second = (Neure_second)getBean(className);
 
         }else{
-            //如果是第一次连接 需要从
             System.out.println("?");
-        }
+            //如果是第一次连接 需要从已经存在的 第二层神经元中随机获取一个
+            String suffix = CellIDCreater.getSecondNeruSuffix();
+            String className = "Neure_second_"+suffix;
+            neure_second = (Neure_second)getBean(className);
+            //保存
+            saveToproperties(key,suffix);
 
-        String value = "";
-        //保存
-        saveToproperties(key,value);
+        }
+        Mitter mitter = new Mitter(key);
+        neure_second.dendrite(mitter);
+
         //传递到轴突
         axon();
     }

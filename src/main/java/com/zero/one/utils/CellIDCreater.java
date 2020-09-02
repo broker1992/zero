@@ -2,7 +2,9 @@ package com.zero.one.utils;
 
 import java.io.*;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Properties;
+import java.util.Set;
 
 public class CellIDCreater {
 
@@ -63,9 +65,13 @@ public class CellIDCreater {
             e.printStackTrace();
         }
         Enumeration<Object> keys = prop.keys();
-        while(keys.hasMoreElements()){
-            String key = (String)keys.nextElement();
-            
+        HashMap<String,String> map = new HashMap<>();
+        while(keys.hasMoreElements()) {
+            String key = (String) keys.nextElement();
+            map.put(key, "1");
         }
+        Set<String> strings = map.keySet();
+        return strings.iterator().next();
+
     }
 }
